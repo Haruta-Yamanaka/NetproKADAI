@@ -59,8 +59,35 @@ def receive_handler(client_socket):
             else:
                 cards = received_object
                 cards.showDeck()
+                print(getCards())
         except Exception as e:
             continue
+
+
+def revealCard(client_socket):#カードをめくる処理
+    
+    #クリックしたらっていう条件分岐を作ってほしい。
+    #以下のコードはクリックした後の処理である。
+
+    tupple = (1,1) #ここにクリックしたカードから返されたタプルを代入したい
+    command = getCommand(tupple)
+    sendCommand(command,client_socket)
+
+
+def getCards():
+    global cards
+    for card in cards:
+        return card
+    
+def sendCommand(command,client_socket):
+    client_socket.send(command.encode("UTF-8"))
+
+
+
+def getCommand(tupple): #選んだインデックスをサーバーに送るコマンドに変換
+    tup1 = (2,1)
+    str = str(tupple[0])+","+str(tupple[1])
+    return str
 
 
 

@@ -63,10 +63,32 @@ def receive_handler(client_socket):
         except Exception as e:
             continue
 
+
+def revealCard(client_socket):#カードをめくる処理
+    
+    #クリックしたらっていう条件分岐を作ってほしい。
+    #以下のコードはクリックした後の処理である。
+
+    index = 0 #ここにクリックしたカードのインデックスを代入したい。
+    command = getCommand(index)
+    sendCommand(command,client_socket)
+
+
 def getCards():
     global cards
     for card in cards:
         return card
+    
+def sendCommand(command,client_socket):
+    client_socket.send(command.encode("UTF-8"))
+
+
+
+def getCommand(index): #選んだインデックスをサーバーに送るコマンドに変換
+    diviser = 13
+    result = divmod(index,diviser)
+    str = str(result[0]+1)+","+str(result[1]+1)
+    return str
 
 
 
