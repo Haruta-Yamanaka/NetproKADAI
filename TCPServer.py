@@ -102,7 +102,7 @@ class Cards:
         global cards
         self.rest = self.getLength()*4
         for i in range(4):
-            for number in self.numbers1:#後でnumbersに直す
+            for number in self.numbers:#後でnumbersに直す
                 cd = Card(number)
                 self.cards.append(cd)
         random.shuffle(self.cards)
@@ -110,7 +110,7 @@ class Cards:
     def showDeck(self):
         str = ""
         str += "\n"
-        m = len(self.numbers1)
+        m = len(self.numbers)
         for i in range(4):
             for card in self.cards[i*m:(i+1)*m]:
                 str += card.getNumber() + ", "
@@ -146,7 +146,7 @@ class Cards:
         return self.rest
     
     def getLength(self):
-        return len(self.numbers1)
+        return len(self.numbers)
     
     def getCards(self):
         return self.cards
