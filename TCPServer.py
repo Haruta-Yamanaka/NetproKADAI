@@ -92,7 +92,6 @@ class Cards:
             "A", "2", "3", "4", "5", "6", "7",
             "8", "9", "10", "J", "Q", "K"
         ]
-        self.numbers1 = ["A"]#実験用
 
     def sayHello(self):
         print("Hello")
@@ -102,7 +101,7 @@ class Cards:
         global cards
         self.rest = self.getLength()*4
         for i in range(4):
-            for number in self.numbers:#後でnumbersに直す
+            for number in self.numbers:
                 cd = Card(number)
                 self.cards.append(cd)
         random.shuffle(self.cards)
