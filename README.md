@@ -1,4 +1,4 @@
-# スケベすぎるネトプロ最終課題
+# ネップロ最終制作課題
 
 ## 概要  
 Pythonのsocketとpygame-guiを用いて作成した  
@@ -28,9 +28,7 @@ Haruta-Yamanaka ... **通信機能＆ゲーム内部**
   二つのクライアントからの接続確立  
   ゲーム進行機能、cardクラスやplayerクラス  
   などの定義を行うスクリプト
-  ゲームの根幹を担います。
-  playerクラスでクライアントからの情報を受け取り、
-  Cardsクラスでカードの情報を管理します。 
+  ゲームの根幹を担います。  
   ![classes_tcpserver](https://github.com/user-attachments/assets/1783c6c2-66d8-43c6-b3b2-09e3c47b305e)  
 
 ### クラス図全体とパッケージ  
