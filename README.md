@@ -6,7 +6,10 @@ Pythonのsocketとpygame-guiを用いて作成した
 
 ## 役割分担
 riporippo ... **GUI作成＆連携**   
-Haruta-Yamanaka ... **通信機能＆ゲーム内部**     
+Haruta-Yamanaka ... **通信機能＆ゲーム内部** 
+
+## 従来の神経衰弱との違い
+Jを引くとなんか起こる。
 
 ## プログラム解説
 * **main.py**  
