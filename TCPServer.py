@@ -59,6 +59,7 @@ class Card:
     def Uncover(self):#カードを表にする
         self.isCovered = False
 
+
     
 
     def Cover(self): #カードを裏にする
@@ -78,7 +79,12 @@ class Card:
         
         else:
             return False
-
+        
+    def getNum(self):
+        return self.number
+    
+    def is_card_get(self):
+        return self.isGet
 
 
 #///////////////////ここからカードを管理すCardsクラス///////////////////////////////

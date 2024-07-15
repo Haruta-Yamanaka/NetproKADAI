@@ -2,11 +2,12 @@ import socket
 import pickle
 import threading
 from TCPServer import Cards,Card
+from typing import Optional
+#from time import sleep
 
 class Client:
     # TCPクライアントの設定
     def __init__(self):
-            
         self.HOST = 'localhost'
         self.PORT = 12345
         self.BUFFER_SIZE = 4096
@@ -14,6 +15,8 @@ class Client:
         self.cards = None
         self.name = None
         self.isMyTurn = True
+        self.is_game_Finish = False
+        self.is_game_winner = "DRAW"
 
 
     def setUp(self):
@@ -46,6 +49,7 @@ class Client:
 
 
     def input_handler(self,client_socket):
+        self.isMyTurn = True
         your_input = input(">>>"); #(1)
         client_socket.send(your_input.encode("UTF-8")); #(2)
 
@@ -62,7 +66,20 @@ class Client:
                         print("あなたの番です。")
                     elif (received_object == "Turn End"):
                         self.isMyTurn = False
+                        #sleep(1)
                         print("ターン終了です。")
+                    elif (received_object == "You Win!"):#GUI制御用勝ち負けフラグ管理
+                        print(received_object)
+                        self.is_game_Finish = True
+                        self.is_game_winner = "You Win!"
+                    elif (received_object == "You Lose..."):
+                        print(received_object)
+                        self.is_game_Finish = True
+                        self.is_game_winner = "You Lose..."
+                    elif(received_object == "DRAW"):
+                        print(received_object)
+                        self.is_game_Finish = True
+                        self.is_game_Finish = "DRAW"
                     else:
                         print(received_object)
                 else:
@@ -72,18 +89,16 @@ class Client:
                 continue
 
 
-    def revealCard(self):#カードをめくる処理
+    def revealCard(self,index):#カードをめくる処理
         #クリックしたらっていう条件分岐を作ってほしい。
         #以下のコードはクリックした後の処理である。
-
-        tupple = (1,1) #ここにクリックしたカードから返されたタプルを代入したい
-        command = self.getCommand(tupple)
+        command = self.getCommand(index)
         self.sendCommand(command,self.client_socket)
 
 
-    def getCards(self):
-        for card in self.cards:
-            return card
+    def getCards(self,index):
+        shitei_card = self.cards.cards[(index[0]-1)*13 + index[1]-1]
+        return shitei_card
         
     def sendCommand(self,command,client_socket):
         client_socket.send(command.encode("UTF-8"))
@@ -92,13 +107,19 @@ class Client:
 
     def getCommand(self,tupple): #選んだインデックスをサーバーに送るコマンドに変換
         tupple = tupple
-        str = str(tupple[0])+","+str(tupple[1])
+        str = f"{tupple[0]},{tupple[1]}"
         return str
 
     def socketSetup(self):
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client_socket.connect((self.HOST, self.PORT))
         print(f"[*] Connected to {self.HOST}:{self.PORT}")
+    
+    def check_turn(self):
+        return self.isMyTurn
+    
+    def get_cards(self):
+        return self.cards
 
 #グローバル変数の設定
 
@@ -106,9 +127,9 @@ class Client:
 # サーバーに接続
 
 
-cl = Client()
-cl.socketSetup()
+#cl = Client()
+#cl.socketSetup()
 
-cl.setUp()
-while True:
-    cl.TurnTask()
+#cl.setUp()
+#while True:
+#    cl.TurnTask()

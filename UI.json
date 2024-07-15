@@ -1,0 +1,26 @@
+{
+    "button":
+    {
+        "colours":
+        {
+            "normal_border":"White",
+            "normal_bg":"SlateGray",
+            "normal_text": "White"
+        },
+        "misc":
+        {
+            "shape":"rounded_rectangle",
+            "shape_corner_radius": "10",
+            "border_width": "2"
+        }
+    },
+
+    "label":
+    {
+        "font":
+        {
+            "name":"中森工芸2018冬季修正",
+            "size":"96"
+        }
+    }
+}
