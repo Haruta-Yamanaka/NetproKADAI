@@ -86,7 +86,6 @@ class Card:
     def is_card_get(self):
         return self.isGet
 
-
 #///////////////////ここからカードを管理すCardsクラス///////////////////////////////
     
 class Cards:
@@ -155,6 +154,24 @@ class Cards:
     
     def getCards(self):
         return self.cards
+    
+    def shuffle(self):
+        list = []
+        for card in self.cards:
+            if card.isCovered:
+                list.append(card)
+            else:
+                continue
+        for card in list:
+            print(card.getNumber())
+        random.shuffle(list)
+        m = 0
+        for i in range(len(self.cards)):
+            if self.cards[i].isCovered:
+                self.cards[i] = list[m]
+                m += 1
+        return self.cards
+
 
 
 
@@ -293,6 +310,9 @@ def getCard(player,index1,index2):#指定のプレイヤーが指定のカード
     global cards
     cards.getCard(player.cardList,index1,index2)
     player.sendMessage(f"{cards.cards[index1].getNumber()}を獲得！")
+    if cards.cards[index1].getNumber() == "J":
+        Shuffle()
+        sendShuffleMessage()
 
 def TurnStart(player):#ターンを始めるときの処理
     print(f"{player.name}のターンを始めます。")
@@ -333,6 +353,15 @@ def showResult(p1,p2): #結果を表示
     else:
         p1.sendMessage("Draw")
         p2.sendMessage("Draw")
+
+def sendShuffleMessage():
+    global playerList
+    for player in playerList:
+        player.sendMessage("Jが獲得されました\nシャッフルが起こります。")
+
+def Shuffle():
+    global cards
+    cards.shuffle()
 
 def main():
     global playersSocket
