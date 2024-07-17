@@ -1,4 +1,4 @@
-# スケベすぎるネトプロ最終課題
+# ネトプロ最終課題-SHINKEI SUIJACK
 
 ## 概要  
 Pythonのsocketとpygame-guiを用いて作成した  
